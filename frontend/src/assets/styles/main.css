@@ -1,7 +1,63 @@
+@font-face {
+  font-family: Avenir;
+  src: url("../font/Avenir.otf") format("opentype");
+}
+
+@font-face {
+  font-family: Avenir;
+  font-weight: bold;
+  src: url("../font/Avenir-Black.otf") format("opentype");
+}
+
+/* Variables */
+:root {
+  --color-green: #32975d;
+  --color-text: #4c534c;
+}
+
 * {
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: Avenir;
+  color: var(--color-text);
+  background-color: #fbfaf9;
+}
+
+#logo {
+  color: var(--color-green);
+  font-size: 2em;
+  font-weight: 500;
+  margin-left: 15px;
+}
+
+#logo-img {
+  width: 40px;
+  height: 40px;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
   }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes rotateIn {
+  from {
+    transform: rotate(-45deg);
+  }
+
+  to {
+    transform: rotate(-10deg);
+  }
+}

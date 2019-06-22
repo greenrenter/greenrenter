@@ -1,11 +1,14 @@
+import { Route, BrowserRouter } from "react-router-dom";
 import React from "react";
-import "@fortawesome/fontawesome-free/css/all.css";
-import "@fortawesome/fontawesome-free/js/all";
+import styled from "styled-components";
 import LandingPage from "./LandingPage";
 import FormPage from "./FormPage.jsx";
 import SummaryPage from "./SummaryPage";
 
-import { Route, BrowserRouter } from "react-router-dom";
+import "@fortawesome/fontawesome-free/css/all.css";
+import "@fortawesome/fontawesome-free/js/all";
+import "normalize.css";
+import "../assets/styles/main.css";
 
 const App = () => {
   return (
