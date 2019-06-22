@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 
+import PieChart from '../components/charts/PieChart';
+
 const Wrapper = styled.div`
     .flex {
         display: flex;
@@ -10,8 +12,10 @@ const Wrapper = styled.div`
     }
 
     .info {
+        line-height: 50px;
         h3 {
             text-align: center;
+            padding-bottom: 20px;
         }
     }
 `;
@@ -24,13 +28,39 @@ class SummaryPage extends Component {
     }
 
 
-
     componentDidMount() {
         // fetch data from db
         console.log('fetching data from DB...');
     }
 
     render() {
+        // this data needs to come from the database
+        const data = [
+            {
+                name: 'Dryer',
+                y: 16.67
+            },
+            {
+                name: 'TV',
+                y: 16.67
+            },
+            {
+                name: 'Fridge',
+                y: 16.67
+            },
+            {
+                name: 'Washer',
+                y: 16.67
+            },
+            {
+                name: 'Dishwasher',
+                y: 16.67
+            },
+            {
+                name: 'AC',
+                y: 16.67
+            },
+        ]
         return (
             <Wrapper>
                 <div className="flex">
@@ -44,10 +74,10 @@ class SummaryPage extends Component {
                         </p>
                     </div>
                     <div className="barchart">
-                        BARCHART COMPONENT, call function to return a BARCHART
+                        
                     </div>
                     <div className="piechart">
-                        PIECHART COMPONENT, call function to return a piechart component
+                        <PieChart data={data} />
                     </div>
                     <div className="energy-supplier" >
                         Energy Supplier call function to return it

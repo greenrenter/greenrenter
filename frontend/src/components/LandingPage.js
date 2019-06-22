@@ -8,7 +8,7 @@ import backgroundImage from '../assets/images/landing-page-background.jpg';
 
 
 const Wrapper = styled.div`
-    height: 100vh;
+    /* height: 100vh; */
 
     .header {
         display: grid;
@@ -24,7 +24,7 @@ const Wrapper = styled.div`
         color: white;
         display: grid;
         grid-template-columns: 1fr;
-        grid-template-rows: 20vh 20vh 20vh 25vh;
+        grid-template-rows: 20vh 20vh 25vh 25vh;
         justify-items: center;
         align-items: center;
         /* Place holder for background image */
