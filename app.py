@@ -60,7 +60,11 @@ def form():
 
 @app.route('/data')
 def data():
+    """
+    rest api for all the data for the applieces consumptioon
 
+    :return: the json format data
+    """
     db = get_db(flaskmysql)
     cur = db.cursor()
     cur.execute('select * from appliences')
@@ -81,6 +85,10 @@ def data():
 
 @app.route('/average')
 def average():
+    """
+    api for the average consumption for comparing
+    :return: json data
+    """
     db = get_db(flaskmysql)
     cur = db.cursor()
     cur.execute('select * from area_average')
@@ -91,6 +99,28 @@ def average():
         drow['id'] = row[0]
         drow['area'] = row[1]
         drow['average'] = row[2]
+
+        dline.append(drow)
+    return jsonify(dline)
+
+
+@app.route('/providers')
+def providers():
+    """
+    api to get the providers list is a rest api for all the data
+    :return: json reply
+    """
+    db = get_db(flaskmysql)
+    cur = db.cursor()
+    cur.execute('select * from providers')
+    result = cur.fetchall()
+    dline = []
+    for row in result:
+        drow = {}
+        drow['id'] = row[0]
+        drow['name'] = row[1]
+        drow['plan'] = row[2]
+        drow['annual_cost'] = row[3]
 
         dline.append(drow)
     return jsonify(dline)
