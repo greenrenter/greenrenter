@@ -16,7 +16,8 @@
 body {
   font-family: "Montserrat", sans-serif;
   color: var(--color-text);
-  background-color: #fbfaf9;
+  background-color: var(--color-white);
+  user-select: none;
 }
 
 #logo {
@@ -42,13 +43,13 @@ body {
   }
 }
 
-@keyframes rotateIn {
+@keyframes slideUp {
   from {
-    transform: rotate(-45deg);
+    transform: translate(0, 5vh);
   }
 
   to {
-    transform: rotate(-10deg);
+    transform: translate(0, 0);
   }
 }
 

@@ -60,6 +60,7 @@ const LandingContent = styled.div`
   grid-column-start: content-start;
   grid-column-end: content-end;
   text-align: center;
+  animation: slideUp 0.3s;
 `;
 
 const Leaf = styled.img`
