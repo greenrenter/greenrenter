@@ -77,14 +77,15 @@ export const FormWrapper = styled.div`
 export const Appliance = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: flex-start;
   align-items: center;
-  padding: 15px 0;
+  padding: 15px 10%;
   .appliance-name {
-    min-width: 100px;
+    min-width: 250px;
     text-align: left;
   }
   .button-tool {
+    margin-right: 15px;
     width: 20px;
     height: 20px;
     opacity: 0.5;

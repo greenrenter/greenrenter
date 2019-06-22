@@ -12,7 +12,7 @@ import {
   FormWrapper
 } from "./FormPageStyledComponents";
 
-import logo from "../assets/images/Logo.svg";
+import logo from "../assets/images/logo.png";
 import starIdle from "../assets/images/star-idle.png";
 import starFull from "../assets/images/star-full.png";
 import validImage from "../assets/images/valid.png";
@@ -118,7 +118,7 @@ export default class Form extends React.Component {
 
   getHouseHoldForm = formProps => {
     return (
-      <div>
+      <FormWrapper>
         <h1>ABOUT YOUR HOUSEHOLD</h1>
 
         <div id="center">
@@ -184,7 +184,7 @@ export default class Form extends React.Component {
             </div>
           </div>
         </div>
-      </div>
+      </FormWrapper>
     );
   };
 

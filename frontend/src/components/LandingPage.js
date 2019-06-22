@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-import logo from "../assets/images/Logo.svg";
+import logo from "../assets/images/logo.png";
 import mainLogo from "../assets/images/logo-main.png";
 import leafImage from "../assets/images/leaf.png";
 import leaf2Image from "../assets/images/leaf2.png";

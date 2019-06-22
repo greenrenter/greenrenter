@@ -1,18 +1,8 @@
-@font-face {
-  font-family: Avenir;
-  src: url("../font/Avenir.otf") format("opentype");
-}
-
-@font-face {
-  font-family: Avenir;
-  font-weight: bold;
-  src: url("../font/Avenir-Black.otf") format("opentype");
-}
-
 /* Variables */
 :root {
   --color-green: #32975d;
   --color-text: #4c534c;
+  --color-white: #faf9f6;
 }
 
 * {
@@ -24,7 +14,7 @@
 }
 
 body {
-  font-family: Avenir;
+  font-family: "Montserrat", sans-serif;
   color: var(--color-text);
   background-color: #fbfaf9;
 }
@@ -60,4 +50,36 @@ body {
   to {
     transform: rotate(-10deg);
   }
+}
+
+input[type="text"],
+input[type="number"] {
+  padding: 10px 15px;
+  margin: 0 15px;
+  border: solid 1px #acacac;
+}
+
+button {
+  min-width: 140px;
+  min-height: 60px;
+  padding: 10px 15px;
+  border: solid 3px var(--color-green);
+  color: var(--color-green);
+  font-size: 1.15em;
+  font-weight: 700;
+}
+
+button:hover {
+  background: var(--color-green);
+  color: var(--color-white);
+}
+
+footer {
+  position: fixed;
+  bottom: 0px;
+  text-align: center;
+  width: 100%;
+  padding: 15px;
+  opacity: 0.7;
+  font-size: 14px;
 }
