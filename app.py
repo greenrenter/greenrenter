@@ -79,6 +79,23 @@ def data():
     return jsonify(dline)
 
 
+@app.route('/average')
+def average():
+    db = get_db(flaskmysql)
+    cur = db.cursor()
+    cur.execute('select * from area_average')
+    result = cur.fetchall()
+    dline = []
+    for row in result:
+        drow = {}
+        drow['id'] = row[0]
+        drow['area'] = row[1]
+        drow['average'] = row[2]
+
+        dline.append(drow)
+    return jsonify(dline)
+
+
 @app.route('/result')
 def result():
     """
