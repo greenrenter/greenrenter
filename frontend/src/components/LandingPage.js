@@ -8,7 +8,7 @@ import leafImage from "../assets/images/leaf.png";
 import leaf2Image from "../assets/images/leaf2.png";
 import leaf3Image from "../assets/images/leaf3.png";
 
-import { Logo } from "../styles";
+import { Logo } from "./Logo";
 
 const LandingWrapper = styled.div`
   height: 100%;

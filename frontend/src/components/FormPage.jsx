@@ -2,55 +2,22 @@ import React from "react";
 import { Formik } from "formik";
 import Rating from "react-rating";
 
-import { Wrapper, Content, Logo } from "../styles";
+import { Logo } from "./Logo";
+import {
+  Wrapper,
+  Content,
+  StatusBar,
+  TableHeader,
+  Appliance,
+  FormWrapper
+} from "./FormPageStyledComponents";
 
 import logo from "../assets/images/Logo.svg";
-
-// const HouseholdWrapper = styled.div`
-//   html {
-//     font-family: "Tahoma", Arial, sans-serif;
-//   }
-
-//   h1 {
-//     text-align: center;
-//   }
-
-//   #center {
-//     text-align: center;
-//   }
-
-//   #contents {
-//     width: auto;
-//     display: inline-block;
-//   }
-
-//   .Field-Container {
-//     text-align: left;
-//     margin-top: 8px;
-//     display: block;
-//   }
-
-//   .field-lbl {
-//     margin-right: 6px;
-//     text-align: right;
-//   }
-
-//   input {
-//     float: right;
-//   }
-
-//   select {
-//     float: right;
-//     width: 100px;
-//   }
-
-//   #optional {
-//     color: gray;
-//     margin-top: 16px;
-//     text-align: Left;
-//     display: block;
-//   }
-// `;
+import starIdle from "../assets/images/star-idle.png";
+import starFull from "../assets/images/star-full.png";
+import validImage from "../assets/images/valid.png";
+import buttonPlus from "../assets/images/plus-button.png";
+import buttonMinus from "../assets/images/minus-button.png";
 
 export default class Form extends React.Component {
   constructor(props) {
@@ -110,34 +77,44 @@ export default class Form extends React.Component {
   };
 
   getApplianceForm = formProps => (
-    <div>
-      <h1>YOUR HOUSEHOLD</h1>
+    <FormWrapper>
+      <h1>Step 1 - Appliances</h1>
+      <p>Fill in the information below to find out how much energy you use.</p>
+      <TableHeader>
+        <span>Appliance</span> <span>Energy Rating</span> <span>Frequency</span>
+      </TableHeader>
       {formProps.values.appliances.map(this.mapAppliance)}
       <button onClick={this.nextForm}>Next</button>
-    </div>
+    </FormWrapper>
   );
-  mapAppliance = (appliance, index) => (
-    <div key={index}>
-      <h3>{appliance.name}</h3>
-      <Rating
-        placeholderRating={appliance.rating}
-        start="0"
-        stop="6"
-        step="1"
-        fractions="2"
-        placeholderSymbol={<i className="fas fa-star" />}
-        emptySymbol={<i className="far fa-star" />}
-        fullSymbol={<i className="fas fa-star" />}
-        onChange={value => {
-          let newRating =
-            parseFloat(value) > 6 ? parseInt(value) / 10 : parseFloat(value); // Workaround for some weird bug with this library :S
-          let stateCopy = { ...this.state };
-          stateCopy.formData.appliances[index].rating = newRating;
-          this.setState(stateCopy);
-        }}
-      />
-    </div>
-  );
+  mapAppliance = (appliance, index) => {
+    return (
+      <Appliance key={index}>
+        <img className="button-tool" src={buttonMinus} />
+        <img className="button-tool" src={buttonPlus} />
+        <h3 className="appliance-name">{appliance.name}</h3>
+        <Rating
+          placeholderRating={appliance.rating}
+          start="0"
+          stop="6"
+          step="1"
+          fractions="2"
+          placeholderSymbol={<img className="star" src={starFull} />}
+          emptySymbol={<img className="star" src={starIdle} />}
+          fullSymbol={<img className="star" src={starFull} />}
+          onChange={value => {
+            let newRating =
+              parseFloat(value) > 6 ? parseInt(value) / 10 : parseFloat(value); // Workaround for some weird bug with this library :S
+            let stateCopy = { ...this.state };
+            stateCopy.formData.appliances[index].rating = newRating;
+            this.setState(stateCopy);
+          }}
+        />
+        <input type="number" /> hrs/week
+        <img src={validImage} width="15px" height="15px" />
+      </Appliance>
+    );
+  };
 
   getHouseHoldForm = formProps => {
     return (
@@ -211,6 +188,38 @@ export default class Form extends React.Component {
     );
   };
 
+  getStatusBar = () => (
+    <StatusBar>
+      <div className="circle" />
+      <div className="dot" />
+      <div className="dot" />
+      <div className="dot" />
+      <div className="dot" />
+      <div className="dot" />
+      <div className="dot" />
+      <div className="dot" />
+      <div className="dot" />
+      <div className="dot" />
+      <div className="dot" />
+      <div className="dot" />
+      <div className="circle" />
+      <div className="dot" />
+      <div className="dot" />
+      <div className="dot" />
+      <div className="dot" />
+      <div className="dot" />
+      <div className="dot" />
+      <div className="dot" />
+      <div className="dot" />
+      <div className="dot" />
+      <div className="dot" />
+      <div className="dot" />
+      <div className="tick-wrapper">
+        <label id="tick">&#x2713;</label>
+      </div>
+    </StatusBar>
+  );
+
   render() {
     return (
       <Wrapper className="wrapper">
@@ -220,11 +229,7 @@ export default class Form extends React.Component {
         </Logo>
         <Content>
           {/* Form status indicator */}
-          <div>
-            <div className="circle" />
-            <hr className="line" />
-            <div className="circle" />
-          </div>
+          {this.getStatusBar()}
           {/* Form */}
           <Formik
             initialValues={this.state.formData}
