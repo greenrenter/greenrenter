@@ -57,6 +57,7 @@ def index():
 def form():
     return render_template('form.html')
 
+
 @app.route('/data')
 def data():
 
@@ -64,7 +65,19 @@ def data():
     cur = db.cursor()
     cur.execute('select * from appliences')
     result = cur.fetchall()
-    return jsonify(result)
+    data= {}
+    dline=[]
+    for row in result:
+        drow={}
+        drow['id'] = row[0]
+        drow['name'] = row[1]
+        drow['power'] = row[2]
+        drow['rate'] = row[3]
+        drow['cost'] = row[4]
+
+        dline.append(drow)
+    return jsonify(dline)
+
 
 @app.route('/result')
 def result():
@@ -74,11 +87,6 @@ def result():
     """
 
     return render_template('result.html')
-
-
-
-
-
 
 
 if __name__ == '__main__':
