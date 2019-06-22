@@ -8,35 +8,38 @@ import backgroundImage from '../assets/images/landing-page-background.jpg';
 
 
 const Wrapper = styled.div`
-    /*  Require UX Input to review*/ 
-    /* background-image: linear-gradient(rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.5)),url(${backgroundImage});
-    background-size: cover;
-    background-repeat: no-repeat;   
-    background-position:  top right; */
+    height: 100vh;
 
     .header {
-        display: flex;
-        justify-content: space-between;
-        /* grid-template-rows: 10vh; */
-        padding-bottom:10px;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 60px 35px;
+        justify-items: center;
         align-items: center;
         padding: 10px;
     }
 
     .content {
-        font-size: 25px;
+        /* font-size: 25px; */
         color: white;
         display: grid;
         grid-template-columns: 1fr;
-        grid-template-rows: 25vh 25vh 25vh;
+        grid-template-rows: 20vh 20vh 20vh 25vh;
         justify-items: center;
         align-items: center;
-        background-image: linear-gradient(rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.5)),url(${backgroundImage});
+        /* Place holder for background image */
+        /* background-image: linear-gradient(rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.5)),url(${backgroundImage});
         background-size: cover;
         background-repeat: no-repeat;   
-        background-position:  top right;
+        background-position:  top right; */
+        background-color: green;
+
+        .label1 {
+            align-self: end;
+        }
 
         .findmore-btn {
+            align-self: top;
             background-color: #4CAF50;
             border: none;
             cursor: pointer;
@@ -48,19 +51,12 @@ const Wrapper = styled.div`
             font-size: 1rem;
             border-radius: 5px;
         }
+
+        p {
+            padding-left: 20px;
+            padding-right: 20px;
+        }
     }
-
-    .footer {
-        /* display: grid;
-        grid-template-columns: 1fr;
-        grid-template-rows: 20vh;        
-        align-items: baseline; */
-        display: flex;
-        align-items: baseline;
-
-    }
-
-
 `;
 
 class LandingPage extends Component {
@@ -68,24 +64,20 @@ class LandingPage extends Component {
         return (
             <Wrapper>
                 <div className='header'>
-                    <img src={logo} alt="logo" width="100" height="100" />
+                    <img src={logo} alt="logo" width="50" height="50" />
                     <h1>Green Renters</h1>
                 </div>
                 <div className="content">
-                    <h2>HOW GREEN ARE YOU?</h2>
-                    <h2>Take 5 min of your time!</h2>
-                    <Link to="/forms">
-                        <button className="findmore-btn">
-                            Find Out More
-                        </button>
+                    <h2 className="label1">HOW GREEN ARE YOU?</h2>
+                    <h2 className="label2">Take 5 min of your time!</h2>
+                    <Link to="/forms" className="findmore-btn">
+                        Find Out More
                     </Link>
-                </div>
-                <div className="footer">
                     <p>Disclaimer: Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                            Consequatur voluptatum quaerat, perferendis suscipit praesentium blanditiis iusto!
-                            Culpa nobis rerum molestiae a magnam laboriosam. Consequatur nemo eos culpa. Ratione, esse harum.
-                            Consequatur voluptatum quaerat, perferendis suscipit praesentium blanditiis iusto!
-                            Culpa nobis rerum molestiae a magnam laboriosam. Consequatur nemo eos culpa. Ratione, esse harum.
+                        Consequatur voluptatum quaerat, perferendis suscipit praesentium blanditiis iusto!
+                        Culpa nobis rerum molestiae a magnam laboriosam. Consequatur nemo eos culpa. Ratione, esse harum.
+                        Consequatur voluptatum quaerat, perferendis suscipit praesentium blanditiis iusto!
+                        Culpa nobis rerum molestiae a magnam laboriosam. Consequatur nemo eos culpa. Ratione, esse harum.
                     </p>
                 </div>
             </Wrapper>
