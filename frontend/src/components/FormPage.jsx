@@ -242,7 +242,19 @@ export default class Form extends React.Component {
 
   getStatusBar = () => (
     <StatusBar>
-      <div className="circle" />
+      <div className="circle active" />
+      <div className={`dot ${this.state.formPage === 1 ? "active" : ""}`} />
+      <div className={`dot ${this.state.formPage === 1 ? "active" : ""}`} />
+      <div className={`dot ${this.state.formPage === 1 ? "active" : ""}`} />
+      <div className={`dot ${this.state.formPage === 1 ? "active" : ""}`} />
+      <div className={`dot ${this.state.formPage === 1 ? "active" : ""}`} />
+      <div className={`dot ${this.state.formPage === 1 ? "active" : ""}`} />
+      <div className={`dot ${this.state.formPage === 1 ? "active" : ""}`} />
+      <div className={`dot ${this.state.formPage === 1 ? "active" : ""}`} />
+      <div className={`dot ${this.state.formPage === 1 ? "active" : ""}`} />
+      <div className={`dot ${this.state.formPage === 1 ? "active" : ""}`} />
+      <div className={`dot ${this.state.formPage === 1 ? "active" : ""}`} />
+      <div className={`circle ${this.state.formPage === 1 ? "active" : ""}`} />
       <div className="dot" />
       <div className="dot" />
       <div className="dot" />
@@ -255,20 +267,6 @@ export default class Form extends React.Component {
       <div className="dot" />
       <div className="dot" />
       <div className="circle" />
-      <div className="dot" />
-      <div className="dot" />
-      <div className="dot" />
-      <div className="dot" />
-      <div className="dot" />
-      <div className="dot" />
-      <div className="dot" />
-      <div className="dot" />
-      <div className="dot" />
-      <div className="dot" />
-      <div className="dot" />
-      <div className="tick-wrapper">
-        <label id="tick">&#x2713;</label>
-      </div>
     </StatusBar>
   );
 

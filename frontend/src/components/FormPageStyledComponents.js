@@ -71,6 +71,11 @@ export const StatusBar = styled.div`
     height: 6px;
     margin-right: 4px;
   }
+
+  .active {
+    border-color: var(--color-green);
+    background: var(--color-green);
+  }
 `;
 
 export const TableHeader = styled.div`
