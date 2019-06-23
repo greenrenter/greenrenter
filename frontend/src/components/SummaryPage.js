@@ -48,7 +48,7 @@ const Content = styled.div`
         line-height: 50px;
         padding: 20px;
     }
-    
+
     .barchart {
         img {
             width: 415px;
@@ -66,7 +66,7 @@ const LineBreaker = styled.div`
     border-style: inset;
     border-width: 1px;
     color: grey;
-     
+
 `;
 
 class SummaryPage extends Component {
@@ -131,22 +131,26 @@ class SummaryPage extends Component {
                 </Logo>
                 <Content>
                     <div className="info">
-                        <h3>Your Energy Profile</h3>
+                        <h2>Your Energy Profile</h2>
+
                         <p>
-                            Thank you for providing the information
+                            Thank you for providing the information!
                         </p>
                         <p>
-                            The Energy Consumption of your household is :
+                            The energy consumption of your household is :
                         </p>
                     </div>
                     <div className="barchart">
                         <img src={barchart} alt="bar-chart" />
                     </div>
                     <div className="piechart">
+                        <p>Here is your energy use breakdown:</p>
                         <PieChart data={data} />
                     </div>
                     <div className="energy-supplier Field-container" >
-                        <h3>Affordable energy suppliers</h3>
+                      <br />
+                      <br />
+                        <h2>Affordable energy suppliers</h2>
                         <label>Here are some affordable energy suppliers options: </label>
                         <br />
                         <select onChange={this.calculateBill()}>
@@ -161,6 +165,7 @@ class SummaryPage extends Component {
                     <LineBreaker />
                     <div className="email">
                         <h3>Email my profile</h3>
+                        <br />
                         <input className="email-input" type="email" name="email" onChange={(e) => this.setState({ email: e.target.value })} />
                         <button className="email-btn" onClick={this.sendEmail}> Send Email </button>
                         <br />
@@ -178,6 +183,7 @@ class SummaryPage extends Component {
                             </p>
                         </a>
                     </div>
+                    <LineBreaker />
                 </Content>
             </Wrapper>
         );

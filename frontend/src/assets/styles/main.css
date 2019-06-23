@@ -1,4 +1,8 @@
 /* Variables */
+
+@import url('https://fonts.googleapis.com/css?family=Montserrat:&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Montserrat:500&display=swap');
+
 :root {
   --color-green: #32975d;
   --color-text: #4c534c;
@@ -23,7 +27,7 @@ body {
 #logo {
   color: var(--color-green);
   font-size: 2em;
-  font-weight: 500;
+  /* font-weight: 500; */
   margin-left: 15px;
 }
 
@@ -59,6 +63,8 @@ input[type="number"] {
   margin: 0 15px;
   border: solid 1px #acacac;
 }
+
+
 
 button {
   min-width: 140px;
@@ -99,4 +105,32 @@ footer {
   padding: 15px;
   opacity: 0.7;
   font-size: 14px;
+}
+
+a {
+  color: #4C534C;
+}
+
+h2 {
+  font-family: "Montserrat", sans-serif;
+  font-size: 35px;
+}
+
+h3 {
+  font-weight: bold;
+}
+.user-results {
+  font-family: "Montserrat", sans-serif;
+  color: #40C18D;
+  font-size: 30px;
+}
+
+.annual-bill {
+  font-weight: 600;
+  size: 30px;
+}
+
+select {
+  font-family: "Montserrat", sans-serif;
+  color: #4C534C;
 }

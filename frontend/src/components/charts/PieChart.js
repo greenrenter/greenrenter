@@ -13,9 +13,11 @@ class Piechart extends Component {
                 type: 'pie',
                 backgroundColor: null
             },
-            title: {
-                text: 'Here is your energy usage breakdown:'
-            },
+            title: false,
+            // title: {
+            //     text: 'Here is your energy usage breakdown:'
+            // },
+            colors: ['#69A790', '#97DE82', '#C0E8C6', '#B8E68C', '#6AC08F', '#A2E6AB'],
             tooltip: {
                 pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
             },
@@ -25,7 +27,7 @@ class Piechart extends Component {
                     cursor: 'pointer',
                     dataLabels: {
                         enabled: true,
-                        format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                        format: '<b>{point.name}</b>: {point.percentage:.1f}%',
                         style: {
                             color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
                         }
