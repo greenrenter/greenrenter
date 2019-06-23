@@ -1,5 +1,5 @@
 import React from "react";
-import { Formik } from "formik";
+import { Formik, Field, FieldArray } from "formik";
 import Rating from "react-rating";
 
 import { Logo } from "./Logo";
@@ -15,7 +15,6 @@ import {
 import logo from "../assets/images/logo.png";
 import starIdle from "../assets/images/star-idle.png";
 import starFull from "../assets/images/star-full.png";
-import validImage from "../assets/images/valid.png";
 import buttonPlus from "../assets/images/plus-button.png";
 import buttonMinus from "../assets/images/minus-button.png";
 
@@ -83,38 +82,69 @@ export default class Form extends React.Component {
       <TableHeader>
         <span>Appliance</span> <span>Energy Rating</span> <span>Frequency</span>
       </TableHeader>
-      {formProps.values.appliances.map(this.mapAppliance)}
+      <FieldArray
+        name="appliances"
+        render={arrayHelpers => (
+          <div>
+            {formProps.values.appliances.map((appliance, index) => {
+              return (
+                <Appliance key={index}>
+                  <img
+                    className="button-tool"
+                    src={buttonMinus}
+                    onClick={() => {
+                      arrayHelpers.remove(index);
+                      this.forceUpdate();
+                    }}
+                  />
+                  <img
+                    className="button-tool"
+                    src={buttonPlus}
+                    onClick={() => {
+                      arrayHelpers.push({
+                        ...appliance,
+                        rating: 0,
+                        frequency: 0
+                      });
+                      this.forceUpdate();
+                    }}
+                  />
+                  <h3 className="appliance-name">{appliance.name}</h3>
+                  <Rating
+                    placeholderRating={appliance.rating}
+                    start="0"
+                    stop="6"
+                    step="1"
+                    fractions="2"
+                    placeholderSymbol={<img className="star" src={starFull} />}
+                    emptySymbol={<img className="star" src={starIdle} />}
+                    fullSymbol={<img className="star" src={starFull} />}
+                    onChange={value => {
+                      let newRating =
+                        parseFloat(value) > 6
+                          ? parseInt(value) / 10
+                          : parseFloat(value); // Workaround for some weird bug with this library :S
+                      arrayHelpers.replace(index, {
+                        ...appliance,
+                        rating: newRating
+                      });
+                    }}
+                  />
+                  <Field
+                    name={`appliances[${index}].frequency`}
+                    type="number"
+                  />
+                  hrs/week
+                </Appliance>
+              );
+            })}
+          </div>
+        )}
+      />
+
       <button onClick={this.nextForm}>Next</button>
     </FormWrapper>
   );
-  mapAppliance = (appliance, index) => {
-    return (
-      <Appliance key={index}>
-        <img className="button-tool" src={buttonMinus} />
-        <img className="button-tool" src={buttonPlus} />
-        <h3 className="appliance-name">{appliance.name}</h3>
-        <Rating
-          placeholderRating={appliance.rating}
-          start="0"
-          stop="6"
-          step="1"
-          fractions="2"
-          placeholderSymbol={<img className="star" src={starFull} />}
-          emptySymbol={<img className="star" src={starIdle} />}
-          fullSymbol={<img className="star" src={starFull} />}
-          onChange={value => {
-            let newRating =
-              parseFloat(value) > 6 ? parseInt(value) / 10 : parseFloat(value); // Workaround for some weird bug with this library :S
-            let stateCopy = { ...this.state };
-            stateCopy.formData.appliances[index].rating = newRating;
-            this.setState(stateCopy);
-          }}
-        />
-        <input type="number" /> hrs/week
-        <img src={validImage} width="15px" height="15px" />
-      </Appliance>
-    );
-  };
 
   getHouseHoldForm = formProps => {
     return (
