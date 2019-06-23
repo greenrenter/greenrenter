@@ -1,6 +1,7 @@
 import React from "react";
 import { Formik, Field, FieldArray } from "formik";
 import Rating from "react-rating";
+import { Link } from 'react-router-dom'
 
 import { Logo } from "./Logo";
 import {
@@ -240,7 +241,10 @@ export default class Form extends React.Component {
           />
           <br />
         </FormField>
-        <button type="submit"> Calculate </button>
+        {/* <button type="submit"> Calculate </button> */}
+        <Link to="/summary" >
+          <button> Calculate </button>
+        </Link >
       </FormWrapper>
     );
   };
