@@ -48,7 +48,12 @@ export default class Form extends React.Component {
             frequency: 100
           },
           {
-            name: "Computer",
+            name: "Dryer",
+            rating: 5,
+            frequency: 100
+          },
+          {
+            name: "Air Conditioning",
             rating: 5,
             frequency: 100
           },
