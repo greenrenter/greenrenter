@@ -10,7 +10,8 @@ class Piechart extends Component {
                 plotBackgroundColor: null,
                 plotBorderWidth: null,
                 plotShadow: false,
-                type: 'pie'
+                type: 'pie',
+                backgroundColor: null
             },
             title: {
                 text: 'Here is your energy usage breakdown:'
