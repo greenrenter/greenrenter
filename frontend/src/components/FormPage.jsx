@@ -9,7 +9,8 @@ import {
   StatusBar,
   TableHeader,
   Appliance,
-  FormWrapper
+  FormWrapper,
+  FormField
 } from "./FormPageStyledComponents";
 
 import logo from "../assets/images/logo.png";
@@ -85,7 +86,6 @@ export default class Form extends React.Component {
 
   submitForm = (values, { setSubmitting }) => {
     if (this.state.errored) {
-      // TODO: segue to summary page
     } else {
       fetch("/user_data", {
         method: "POST",
@@ -190,45 +190,51 @@ export default class Form extends React.Component {
         <p>
           Fill in the information below to find out how much energy you use.
         </p>
-        <label>Number of People</label>
-        <Field type="text" name="household.number_of_people" required />
+        <FormField>
+          <label>Number of People</label>
+          <Field type="text" name="household.number_of_people" required />
+          <br />
+        </FormField>
+        <FormField>
+          <label>Postcode</label>
+          <Field
+            type="text"
+            id="postcode"
+            placeholder="..."
+            name="household.postcode"
+            required
+          />
+          <br />
+        </FormField>
         <br />
-
-        <label>Postcode</label>
-        <Field
-          type="text"
-          id="postcode"
-          placeholder="..."
-          name="household.postcode"
-          required
-        />
+        <FormField>
+          *optional
+          <br />
+          <label>Energy Supplier</label>
+          <select
+            onChange={e => {
+              let newState = this.state;
+              newState.formData.household.energy_supplier = e.target.value;
+              this.setState(newState);
+            }}
+          >
+            {ENERGY_SUPPLIERS.map((e, index) => (
+              <option key={index} value={e}>
+                {e}
+              </option>
+            ))}
+          </select>
+        </FormField>
         <br />
-
-        <label id="optional">*optional</label>
-        <br />
-        <label>Energy Supplier</label>
-        <select
-          onChange={e => {
-            let newState = this.state;
-            newState.formData.household.energy_supplier = e.target.value;
-            this.setState(newState);
-          }}
-        >
-          {ENERGY_SUPPLIERS.map((e, index) => (
-            <option key={index} value={e}>
-              {e}
-            </option>
-          ))}
-        </select>
-        <br />
-
-        <label>Bill</label>
-        <Field
-          type="text"
-          name="household.bill"
-          placeholder="$ Enter bill..."
-        />
-        <br />
+        <FormField>
+          <label>Bill</label>
+          <Field
+            type="text"
+            name="household.bill"
+            placeholder="$ Enter bill..."
+          />
+          <br />
+        </FormField>
         <button type="submit"> Calculate </button>
       </FormWrapper>
     );

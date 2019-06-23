@@ -10,13 +10,27 @@ export const Wrapper = styled.div`
 `;
 
 export const Content = styled.div`
-  height: 100%;
   max-width: 90vw;
   padding: 15px;
   grid-column-start: content-start;
   grid-column-end: content-end;
   animation: fadeIn 0.3s;
   background: #40c1560d;
+  margin-bottom: 50px;
+`;
+
+export const FormField = styled.div`
+  margin: 15px;
+  padding: 15px 20%;
+  text-align: left;
+  label {
+    font-size: 22px;
+  }
+  select {
+    padding: 10px 15px;
+    margin: 0 15px;
+    border: solid 1px #acacac;
+  }
 `;
 
 export const StatusBar = styled.div`
