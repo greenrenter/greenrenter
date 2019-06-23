@@ -10,12 +10,17 @@ import leaf3Image from "../assets/images/leaf3.png";
 
 import { Logo } from "./Logo";
 
+<<<<<<< HEAD
 const LandingWrapper = styled.div`
   height: 100%;
   width: 100%;
   display: grid;
   grid-template-columns: [page-start] 10% [content-start] auto [content-end] 10% [page-end];
   animation: fadeIn 0.6s;
+=======
+const Wrapper = styled.div`
+    /* height: 100vh; */
+>>>>>>> front-end
 
   #leaf1 {
     top: 50vh;
@@ -32,6 +37,7 @@ const LandingWrapper = styled.div`
   }
 `;
 
+<<<<<<< HEAD
 const FindMoreBtn = styled.button`
   align-self: top;
   border: none;
@@ -45,6 +51,22 @@ const FindMoreBtn = styled.button`
   border: solid var(--color-green) 5px;
   margin: 40px 20px;
 `;
+=======
+    .content {
+        /* font-size: 25px; */
+        color: white;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 20vh 20vh 25vh 25vh;
+        justify-items: center;
+        align-items: center;
+        /* Place holder for background image */
+        /* background-image: linear-gradient(rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.5)),url(${backgroundImage});
+        background-size: cover;
+        background-repeat: no-repeat;   
+        background-position:  top right; */
+        background-color: green;
+>>>>>>> front-end
 
 const Heading = styled.header`
   align-self: end;
@@ -73,6 +95,7 @@ const Leaf = styled.img`
 const MainLogo = styled.img``;
 
 class LandingPage extends Component {
+<<<<<<< HEAD
   render() {
     return (
       <LandingWrapper>
@@ -108,6 +131,30 @@ class LandingPage extends Component {
       </LandingWrapper>
     );
   }
+=======
+    render() {
+        return (
+            <Wrapper>
+                {/* <div className='header'>
+                    <img src={logo} alt="logo" width="50" height="50" />
+                    <h1>Green Renters</h1>
+                </div> */}
+                <div className="content">
+                    <h2 className="label1">HOW GREEN ARE YOU?</h2>
+                    <h2 className="label2">Take 5 min of your time!</h2>
+                    <Link to="/forms" className="findmore-btn">
+                        Find Out More
+                    </Link>
+                    <p>Disclaimer:
+                        We highly value your privacy and any information collected with
+                        not be shared with any 3rd parties.
+                        Figures provided will only be an estimation.
+                    </p>
+                </div>
+            </Wrapper>
+        );
+    }
+>>>>>>> front-end
 }
 
 export default LandingPage;

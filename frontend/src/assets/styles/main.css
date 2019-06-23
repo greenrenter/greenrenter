@@ -70,6 +70,22 @@ button {
   font-weight: 700;
 }
 
+.email-btn {
+  min-width: 141px;
+  min-height: 40px;
+  padding: 10px 15px;
+  border: solid 3px var(--color-green);
+  color: var(--color-green);
+  font-size: 1.15em;
+  font-weight: 700;
+}
+
+.email-input {
+  min-width: 364px;
+  min-height: 40px;
+  margin-right: 20px;
+}
+
 button:hover {
   background: var(--color-green);
   color: var(--color-white);
