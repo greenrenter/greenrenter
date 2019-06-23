@@ -73,9 +73,10 @@ class SummaryPage extends Component {
 
 
     state = {
-        email: ''
-    }
+        email: '',
+        energy_bill: 912.45,
 
+    }
 
     componentDidMount() {
         // fetch data from db
@@ -86,6 +87,11 @@ class SummaryPage extends Component {
         // TODO add sending email to external service
         e.preventDefault();
         console.log(`email sent to ${this.state.email}...`);
+    }
+
+    calculateBill = (e) => {
+        console.log(e)
+        console.log('bill getting called')
     }
 
     render() {
@@ -143,13 +149,13 @@ class SummaryPage extends Component {
                         <h3>Affordable energy suppliers</h3>
                         <label>Here are some affordable energy suppliers options: </label>
                         <br />
-                        <select>
-                            <option value="">Red Energy</option>
-                            <option value="">AGL</option>
-                            <option value="">Supplier</option>
+                        <select onChange={this.calculateBill()}>
+                            <option name="Red Energy" >Red Energy</option>
+                            <option name="AGL" >AGL</option>
+                            <option name="Supplier">Supplier</option>
                         </select>
                         <p>
-                            Your estimated annual energy bill is : <strong>$912.45</strong>
+                            Your estimated annual energy bill is : <strong>${this.state.energy_bill}</strong>
                         </p>
                     </div>
                     <LineBreaker />
