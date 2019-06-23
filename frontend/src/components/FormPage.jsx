@@ -86,6 +86,7 @@ export default class Form extends React.Component {
 
   submitForm = (values, { setSubmitting }) => {
     if (this.state.errored) {
+      document.location.href = "/summary";
     } else {
       fetch("/user_data", {
         method: "POST",
@@ -287,7 +288,7 @@ export default class Form extends React.Component {
           {/* Form */}
           <Formik
             initialValues={this.state.formData}
-            validate={values => {}}
+            validate={values => { }}
             onSubmit={this.submitForm}
           >
             {({
@@ -300,19 +301,19 @@ export default class Form extends React.Component {
               isSubmitting
               /* and other goodies */
             }) => (
-              <form onSubmit={handleSubmit}>
-                {this.getCurrentForm({
-                  values,
-                  errors,
-                  touched,
-                  handleChange,
-                  handleBlur,
-                  handleSubmit,
-                  isSubmitting
-                  /* and other goodies */
-                })}
-              </form>
-            )}
+                <form onSubmit={handleSubmit}>
+                  {this.getCurrentForm({
+                    values,
+                    errors,
+                    touched,
+                    handleChange,
+                    handleBlur,
+                    handleSubmit,
+                    isSubmitting
+                    /* and other goodies */
+                  })}
+                </form>
+              )}
           </Formik>
         </Content>
       </Wrapper>
