@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jun 22, 2019 at 04:54 PM
+-- Generation Time: Jun 23, 2019 at 01:06 PM
 -- Server version: 5.7.23-0ubuntu0.18.04.1
 -- PHP Version: 7.2.10-0ubuntu0.18.04.1
 
@@ -127,6 +127,18 @@ INSERT INTO `area_average` (`id`, `area`, `average`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `email_sub`
+--
+
+CREATE TABLE `email_sub` (
+  `id` int(11) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `data_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `providers`
 --
 
@@ -167,6 +179,41 @@ INSERT INTO `providers` (`id`, `name`, `plan`, `annual_cost`) VALUES
 (23, 'Mojo Power', 'Mojo Connect', '2052.06'),
 (24, 'QEnergy', 'Home Your Way', '2445.19');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_appliences`
+--
+
+CREATE TABLE `user_appliences` (
+  `id` int(11) NOT NULL,
+  `uid` int(11) NOT NULL,
+  `applience` varchar(100) NOT NULL,
+  `power` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_data`
+--
+
+CREATE TABLE `user_data` (
+  `uid` int(11) NOT NULL,
+  `no_of_people` int(11) NOT NULL,
+  `postcode` int(11) NOT NULL,
+  `energysuplier` varchar(100) NOT NULL,
+  `bill` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `user_data`
+--
+
+INSERT INTO `user_data` (`uid`, `no_of_people`, `postcode`, `energysuplier`, `bill`) VALUES
+(1, 30, 79798, '', 0),
+(2, 30, 79798, '', 0);
+
 --
 -- Indexes for dumped tables
 --
@@ -184,10 +231,28 @@ ALTER TABLE `area_average`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `email_sub`
+--
+ALTER TABLE `email_sub`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `providers`
 --
 ALTER TABLE `providers`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `user_appliences`
+--
+ALTER TABLE `user_appliences`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `user_data`
+--
+ALTER TABLE `user_data`
+  ADD PRIMARY KEY (`uid`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -204,10 +269,25 @@ ALTER TABLE `appliences`
 ALTER TABLE `area_average`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 --
+-- AUTO_INCREMENT for table `email_sub`
+--
+ALTER TABLE `email_sub`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT for table `providers`
 --
 ALTER TABLE `providers`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+--
+-- AUTO_INCREMENT for table `user_appliences`
+--
+ALTER TABLE `user_appliences`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `user_data`
+--
+ALTER TABLE `user_data`
+  MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
