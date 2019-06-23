@@ -18,11 +18,14 @@ import starFull from "../assets/images/star-full.png";
 import buttonPlus from "../assets/images/plus-button.png";
 import buttonMinus from "../assets/images/minus-button.png";
 
+// HaRdc0ded energy suppliers xD
+const ENERGY_SUPPLIERS = ["Ausgrid", "Exxon", "Renter", "Synergy"];
+
 export default class Form extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      formPage: 0,
+      formPage: 1,
       // This defines the main form model which should be sent over to the server
       // TODO: Load appliances from server
       formData: {
@@ -42,7 +45,13 @@ export default class Form extends React.Component {
             rating: 5,
             frequency: 100
           }
-        ]
+        ],
+        household: {
+          number_of_people: 0,
+          postcode: "",
+          energy_supplier: "",
+          bill: 0
+        }
       }
     };
   }
@@ -149,71 +158,48 @@ export default class Form extends React.Component {
   getHouseHoldForm = formProps => {
     return (
       <FormWrapper>
-        <h1>ABOUT YOUR HOUSEHOLD</h1>
+        <h1>Step 2 - Household</h1>
+        <p>
+          Fill in the information below to find out how much energy you use.
+        </p>
+        <label>Number of People</label>
+        <Field type="text" name="household.number_of_people" required />
+        <br />
 
-        <div id="center">
-          <div id="contents">
-            <div className="Field-Container">
-              <label className="field-lbl" for="people">
-                NUMBER OF PEOPLE
-              </label>
-              <input
-                type="text"
-                id="people"
-                name="people"
-                required
-                minlength="4"
-                maxlength="8"
-                size="10"
-              />
-            </div>
+        <label>Postcode</label>
+        <Field
+          type="text"
+          id="postcode"
+          placeholder="..."
+          name="household.postcode"
+          required
+        />
+        <br />
 
-            <div className="Field-Container">
-              <label className="field-lbl" for="people">
-                POSTCODE
-              </label>
-              <input
-                type="text"
-                id="postcode"
-                name="postcode"
-                required
-                minlength="4"
-                maxlength="8"
-                size="10"
-              />
-            </div>
+        <label id="optional">*optional</label>
+        <br />
+        <label>Energy Supplier</label>
+        <select
+          onChange={e => {
+            let newState = this.state;
+            newState.formData.household.energy_supplier = e.target.value;
+            this.setState(newState);
+          }}
+        >
+          {ENERGY_SUPPLIERS.map(e => (
+            <option value={e}>{e}</option>
+          ))}
+        </select>
+        <br />
 
-            <div className="Field-Container">
-              <label id="optional">
-                <u>optional</u>
-              </label>
-              <label className="field-lbl" for="people">
-                ENERGY SUPPLIER
-              </label>
-              <select id="Supplier" name="Supplier">
-                <option value="#">Ausgrid</option>
-                <option value="#">Exxon</option>
-                <option value="#">Renter</option>
-                <option value="#">Synergy</option>
-              </select>
-            </div>
-
-            <div className="Field-Container">
-              <label className="field-lbl" for="Bill">
-                BILL
-              </label>
-              <input
-                type="text"
-                id="BILL"
-                name="BILL"
-                Placeholder="$"
-                minlength="4"
-                maxlength="8"
-                size="10"
-              />
-            </div>
-          </div>
-        </div>
+        <label>Bill</label>
+        <Field
+          type="text"
+          name="household.bill"
+          placeholder="$ Enter bill..."
+        />
+        <br />
+        <button type="submit"> Calculate </button>
       </FormWrapper>
     );
   };
