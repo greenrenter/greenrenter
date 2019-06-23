@@ -43,6 +43,16 @@ export default class Form extends React.Component {
             name: "Washer",
             rating: 5,
             frequency: 100
+          },
+          {
+            name: "Computer",
+            rating: 5,
+            frequency: 100
+          },
+          {
+            name: "TV",
+            rating: 5,
+            frequency: 100
           }
         ],
         household: {
