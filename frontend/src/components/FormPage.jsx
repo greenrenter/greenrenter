@@ -1,15 +1,34 @@
 import React from "react";
-import { Formik } from "formik";
+import { Formik, Field, FieldArray } from "formik";
 import Rating from "react-rating";
-import "./Form.css";
+
+import { Logo } from "./Logo";
+import {
+  Wrapper,
+  Content,
+  StatusBar,
+  TableHeader,
+  Appliance,
+  FormWrapper,
+  FormField
+} from "./FormPageStyledComponents";
+
+import logo from "../assets/images/logo.png";
+import starIdle from "../assets/images/star-idle.png";
+import starFull from "../assets/images/star-full.png";
+import buttonPlus from "../assets/images/plus-button.png";
+import buttonMinus from "../assets/images/minus-button.png";
+
+// HaRdc0ded energy suppliers xD
+const ENERGY_SUPPLIERS = ["Ausgrid", "Exxon", "Renter", "Synergy"];
 
 export default class Form extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       formPage: 0,
+      errored: false, // XD
       // This defines the main form model which should be sent over to the server
-      // TODO: Load appliances from server
       formData: {
         appliances: [
           {
@@ -26,8 +45,24 @@ export default class Form extends React.Component {
             name: "Washer",
             rating: 5,
             frequency: 100
+          },
+          {
+            name: "Computer",
+            rating: 5,
+            frequency: 100
+          },
+          {
+            name: "TV",
+            rating: 5,
+            frequency: 100
           }
-        ]
+        ],
+        household: {
+          number_of_people: 0,
+          postcode: "",
+          energy_supplier: "",
+          bill: 0
+        }
       }
     };
   }
@@ -37,6 +72,7 @@ export default class Form extends React.Component {
     console.info(this.state.formData);
   }
 
+  // FORM STUFF
   getCurrentForm = formProps => {
     switch (this.state.formPage) {
       case 0:
@@ -49,10 +85,27 @@ export default class Form extends React.Component {
   };
 
   submitForm = (values, { setSubmitting }) => {
-    console.log(`Form submitted with values: ${JSON.stringify(values)}`);
+    if (this.state.errored) {
+    } else {
+      fetch("/user_data", {
+        method: "POST",
+        mode: "cors",
+        cache: "no-cache",
+        credentials: "same-origin",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        redirect: "follow",
+        referrer: "no-referrer",
+        body: JSON.stringify(values)
+      }).then(response => {
+        if (response.status !== 200)
+          this.setState({ ...this.state, errored: true });
+      });
+    }
   };
 
-  next = () => {
+  nextForm = () => {
     this.setState({
       ...this.state,
       formPage: this.state.formPage + 1
@@ -60,84 +113,205 @@ export default class Form extends React.Component {
   };
 
   getApplianceForm = formProps => (
-    <div>
-      <h1>Appliances</h1>
-      {formProps.values.appliances.map(this.mapAppliance)}
-      <button onClick={this.next}>Next</button>
-    </div>
-  );
-
-  mapAppliance = (appliance, index) => (
-    <div key={index}>
-      <h3>{appliance.name}</h3>
-      <Rating
-        placeholderRating={appliance.rating}
-        start="0"
-        stop="6"
-        step="1"
-        fractions="2"
-        placeholderSymbol={<i className="fas fa-star" />}
-        emptySymbol={<i className="far fa-star" />}
-        fullSymbol={<i className="fas fa-star" />}
-        onChange={value => {
-          let newRating =
-            parseFloat(value) > 6 ? parseInt(value) / 10 : parseFloat(value); // Workaround for some weird bug with this library :S
-          let stateCopy = { ...this.state };
-          stateCopy.formData.appliances[index].rating = newRating;
-          this.setState(stateCopy);
-        }}
+    <FormWrapper>
+      <h1>Step 1 - Appliances</h1>
+      <p>Fill in the information below to find out how much energy you use.</p>
+      <TableHeader>
+        <span>Appliance</span> <span>Energy Rating</span> <span>Frequency</span>
+      </TableHeader>
+      <FieldArray
+        name="appliances"
+        render={arrayHelpers => (
+          <div>
+            {formProps.values.appliances.map((appliance, index) => {
+              return (
+                <Appliance key={index}>
+                  <img
+                    className="button-tool"
+                    src={buttonMinus}
+                    onClick={() => {
+                      arrayHelpers.remove(index);
+                      this.forceUpdate();
+                    }}
+                  />
+                  <img
+                    className="button-tool"
+                    src={buttonPlus}
+                    onClick={() => {
+                      arrayHelpers.push({
+                        ...appliance,
+                        rating: 0,
+                        frequency: 0
+                      });
+                      this.forceUpdate();
+                    }}
+                  />
+                  <h3 className="appliance-name">{appliance.name}</h3>
+                  <Rating
+                    placeholderRating={appliance.rating}
+                    start="0"
+                    stop="6"
+                    step="1"
+                    fractions="2"
+                    placeholderSymbol={<img className="star" src={starFull} />}
+                    emptySymbol={<img className="star" src={starIdle} />}
+                    fullSymbol={<img className="star" src={starFull} />}
+                    onChange={value => {
+                      let newRating =
+                        parseFloat(value) > 6
+                          ? parseInt(value) / 10
+                          : parseFloat(value); // Workaround for some weird bug with this library :S
+                      arrayHelpers.replace(index, {
+                        ...appliance,
+                        rating: newRating
+                      });
+                    }}
+                  />
+                  <Field
+                    name={`appliances[${index}].frequency`}
+                    type="number"
+                  />
+                  hrs/week
+                </Appliance>
+              );
+            })}
+          </div>
+        )}
       />
-    </div>
+
+      <button onClick={this.nextForm}>Next</button>
+    </FormWrapper>
   );
 
   getHouseHoldForm = formProps => {
     return (
-      <div>
-        <h1>Household</h1>
-      </div>
+      <FormWrapper>
+        <h1>Step 2 - Household</h1>
+        <p>
+          Fill in the information below to find out how much energy you use.
+        </p>
+        <FormField>
+          <label>Number of People</label>
+          <Field type="text" name="household.number_of_people" required />
+          <br />
+        </FormField>
+        <FormField>
+          <label>Postcode</label>
+          <Field
+            type="text"
+            id="postcode"
+            placeholder="..."
+            name="household.postcode"
+            required
+          />
+          <br />
+        </FormField>
+        <br />
+        <FormField>
+          *optional
+          <br />
+          <label>Energy Supplier</label>
+          <select
+            onChange={e => {
+              let newState = this.state;
+              newState.formData.household.energy_supplier = e.target.value;
+              this.setState(newState);
+            }}
+          >
+            {ENERGY_SUPPLIERS.map((e, index) => (
+              <option key={index} value={e}>
+                {e}
+              </option>
+            ))}
+          </select>
+        </FormField>
+        <br />
+        <FormField>
+          <label>Bill</label>
+          <Field
+            type="text"
+            name="household.bill"
+            placeholder="$ Enter bill..."
+          />
+          <br />
+        </FormField>
+        <button type="submit"> Calculate </button>
+      </FormWrapper>
     );
   };
 
+  getStatusBar = () => (
+    <StatusBar>
+      <div className="circle active" />
+      <div className={`dot ${this.state.formPage === 1 ? "active" : ""}`} />
+      <div className={`dot ${this.state.formPage === 1 ? "active" : ""}`} />
+      <div className={`dot ${this.state.formPage === 1 ? "active" : ""}`} />
+      <div className={`dot ${this.state.formPage === 1 ? "active" : ""}`} />
+      <div className={`dot ${this.state.formPage === 1 ? "active" : ""}`} />
+      <div className={`dot ${this.state.formPage === 1 ? "active" : ""}`} />
+      <div className={`dot ${this.state.formPage === 1 ? "active" : ""}`} />
+      <div className={`dot ${this.state.formPage === 1 ? "active" : ""}`} />
+      <div className={`dot ${this.state.formPage === 1 ? "active" : ""}`} />
+      <div className={`dot ${this.state.formPage === 1 ? "active" : ""}`} />
+      <div className={`dot ${this.state.formPage === 1 ? "active" : ""}`} />
+      <div className={`circle ${this.state.formPage === 1 ? "active" : ""}`} />
+      <div className="dot" />
+      <div className="dot" />
+      <div className="dot" />
+      <div className="dot" />
+      <div className="dot" />
+      <div className="dot" />
+      <div className="dot" />
+      <div className="dot" />
+      <div className="dot" />
+      <div className="dot" />
+      <div className="dot" />
+      <div className="circle" />
+    </StatusBar>
+  );
+
   render() {
     return (
-      <div>
-        {/* Form status indicator */}
-        <div>
-          <div className="circle" />
-          <hr className="line" />
-          <div className="circle" />
-        </div>
-        {/* Form */}
-        <Formik
-          initialValues={this.state.formData}
-          validate={values => {}}
-          onSubmit={this.submitForm}
-        >
-          {({
-            values,
-            errors,
-            touched,
-            handleChange,
-            handleBlur,
-            handleSubmit,
-            isSubmitting
-            /* and other goodies */
-          }) => (
-            <form onSubmit={handleSubmit}>
-              {this.getCurrentForm({
-                values,
-                errors,
-                touched,
-                handleChange,
-                handleBlur,
-                handleSubmit,
-                isSubmitting
-                /* and other goodies */
-              })}
-            </form>
-          )}
-        </Formik>
-      </div>
+      <Wrapper className="wrapper">
+        <Logo>
+          <img id="logo-img" src={logo} alt="logo" />
+          <h1 id="logo">GreenRenter</h1>
+        </Logo>
+        <Content>
+          {/* Form status indicator */}
+          {this.getStatusBar()}
+          {/* Form */}
+          <Formik
+            initialValues={this.state.formData}
+            validate={values => {}}
+            onSubmit={this.submitForm}
+          >
+            {({
+              values,
+              errors,
+              touched,
+              handleChange,
+              handleBlur,
+              handleSubmit,
+              isSubmitting
+              /* and other goodies */
+            }) => (
+              <form onSubmit={handleSubmit}>
+                {this.getCurrentForm({
+                  values,
+                  errors,
+                  touched,
+                  handleChange,
+                  handleBlur,
+                  handleSubmit,
+                  isSubmitting
+                  /* and other goodies */
+                })}
+              </form>
+            )}
+          </Formik>
+        </Content>
+      </Wrapper>
     );
   }
 }
