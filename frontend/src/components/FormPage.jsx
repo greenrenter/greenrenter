@@ -26,6 +26,7 @@ export default class Form extends React.Component {
     super(props);
     this.state = {
       formPage: 0,
+      errored: false, // XD
       // This defines the main form model which should be sent over to the server
       formData: {
         appliances: [
@@ -83,21 +84,25 @@ export default class Form extends React.Component {
   };
 
   submitForm = (values, { setSubmitting }) => {
-    fetch("/user_data", {
-      method: "POST",
-      mode: "cors",
-      cache: "no-cache",
-      credentials: "same-origin",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      redirect: "follow",
-      referrer: "no-referrer",
-      body: JSON.stringify(values)
-    }).then(response => {
-      console.log(`Form submitted with values: ${response.json()}`);
-      response.json();
-    });
+    if (this.state.errored) {
+      // TODO: segue to summary page
+    } else {
+      fetch("/user_data", {
+        method: "POST",
+        mode: "cors",
+        cache: "no-cache",
+        credentials: "same-origin",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        redirect: "follow",
+        referrer: "no-referrer",
+        body: JSON.stringify(values)
+      }).then(response => {
+        if (response.status !== 200)
+          this.setState({ ...this.state, errored: true });
+      });
+    }
   };
 
   nextForm = () => {
