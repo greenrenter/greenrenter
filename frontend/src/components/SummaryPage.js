@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 import "../assets/styles/main.css";
 import logo from "../assets/images/logo.png";
+import barchart from "../assets/images/bar-chart.png";
 import PieChart from '../components/charts/PieChart';
 import { Logo } from "./Logo";
 
@@ -46,6 +47,13 @@ const Content = styled.div`
     .externalInfo {
         line-height: 50px;
         padding: 20px;
+    }
+    
+    .barchart {
+        img {
+            width: 415px;
+            height: auto;
+        }
     }
 `;
 
@@ -126,7 +134,7 @@ class SummaryPage extends Component {
                         </p>
                     </div>
                     <div className="barchart">
-                        Barchart goes here ABOVE AVERAGE
+                        <img src={barchart} alt="bar-chart" />
                     </div>
                     <div className="piechart">
                         <PieChart data={data} />
