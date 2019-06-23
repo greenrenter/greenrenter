@@ -1,7 +1,104 @@
+/* Variables */
+:root {
+  --color-green: #32975d;
+  --color-text: #4c534c;
+  --color-white: #faf9f6;
+}
+
 * {
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: "Montserrat", sans-serif;
+  color: var(--color-text);
+  background-color: var(--color-white);
+  user-select: none;
+}
+
+#logo {
+  color: var(--color-green);
+  font-size: 2em;
+  font-weight: 500;
+  margin-left: 15px;
+}
+
+#logo-img {
+  width: 40px;
+  height: 40px;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
   }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translate(0, 5vh);
+  }
+
+  to {
+    transform: translate(0, 0);
+  }
+}
+
+input[type="text"],
+input[type="number"] {
+  padding: 10px 15px;
+  margin: 0 15px;
+  border: solid 1px #acacac;
+}
+
+
+
+button {
+  min-width: 140px;
+  min-height: 60px;
+  padding: 10px 15px;
+  border: solid 3px var(--color-green);
+  color: var(--color-green);
+  font-size: 1.15em;
+  font-weight: 700;
+}
+
+.email-btn {
+  min-width: 141px;
+  min-height: 40px;
+  padding: 10px 15px;
+  border: solid 3px var(--color-green);
+  color: var(--color-green);
+  font-size: 1.15em;
+  font-weight: 700;
+}
+
+.email-input {
+  min-width: 364px;
+  min-height: 40px;
+  margin-right: 20px;
+}
+
+button:hover {
+  background: var(--color-green);
+  color: var(--color-white);
+}
+
+footer {
+  position: fixed;
+  bottom: 0px;
+  text-align: center;
+  width: 100%;
+  padding: 15px;
+  opacity: 0.7;
+  font-size: 14px;
+}

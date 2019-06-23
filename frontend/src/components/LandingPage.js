@@ -8,7 +8,7 @@ import backgroundImage from '../assets/images/landing-page-background.jpg';
 
 
 const Wrapper = styled.div`
-    height: 100vh;
+    /* height: 100vh; */
 
     .header {
         display: grid;
@@ -24,7 +24,7 @@ const Wrapper = styled.div`
         color: white;
         display: grid;
         grid-template-columns: 1fr;
-        grid-template-rows: 20vh 20vh 20vh 25vh;
+        grid-template-rows: 20vh 20vh 25vh 25vh;
         justify-items: center;
         align-items: center;
         /* Place holder for background image */
@@ -63,21 +63,20 @@ class LandingPage extends Component {
     render() {
         return (
             <Wrapper>
-                <div className='header'>
+                {/* <div className='header'>
                     <img src={logo} alt="logo" width="50" height="50" />
                     <h1>Green Renters</h1>
-                </div>
+                </div> */}
                 <div className="content">
                     <h2 className="label1">HOW GREEN ARE YOU?</h2>
                     <h2 className="label2">Take 5 min of your time!</h2>
                     <Link to="/forms" className="findmore-btn">
                         Find Out More
                     </Link>
-                    <p>Disclaimer: Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                        Consequatur voluptatum quaerat, perferendis suscipit praesentium blanditiis iusto!
-                        Culpa nobis rerum molestiae a magnam laboriosam. Consequatur nemo eos culpa. Ratione, esse harum.
-                        Consequatur voluptatum quaerat, perferendis suscipit praesentium blanditiis iusto!
-                        Culpa nobis rerum molestiae a magnam laboriosam. Consequatur nemo eos culpa. Ratione, esse harum.
+                    <p>Disclaimer:
+                        We highly value your privacy and any information collected with
+                        not be shared with any 3rd parties.
+                        Figures provided will only be an estimation.
                     </p>
                 </div>
             </Wrapper>
