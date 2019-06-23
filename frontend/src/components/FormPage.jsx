@@ -98,10 +98,14 @@ export default class Form extends React.Component {
         redirect: "follow",
         referrer: "no-referrer",
         body: JSON.stringify(values)
-      }).then(response => {
-        if (response.status !== 200)
+      })
+        .then(response => {
+          if (response.status !== 200)
+            this.setState({ ...this.state, errored: true });
+        })
+        .catch(err => {
           this.setState({ ...this.state, errored: true });
-      });
+        });
     }
   };
 
