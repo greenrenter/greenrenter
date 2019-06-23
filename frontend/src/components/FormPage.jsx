@@ -21,7 +21,7 @@ import buttonPlus from "../assets/images/plus-button.png";
 import buttonMinus from "../assets/images/minus-button.png";
 
 // HaRdc0ded energy suppliers xD
-const ENERGY_SUPPLIERS = ["Exxon", "Renter", "Synergy"];
+const ENERGY_SUPPLIERS = ["Ausgrid", "AGL", "Energy Australia"];
 
 export default class Form extends React.Component {
   constructor(props) {
