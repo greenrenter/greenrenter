@@ -25,9 +25,8 @@ export default class Form extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      formPage: 1,
+      formPage: 0,
       // This defines the main form model which should be sent over to the server
-      // TODO: Load appliances from server
       formData: {
         appliances: [
           {
@@ -74,7 +73,21 @@ export default class Form extends React.Component {
   };
 
   submitForm = (values, { setSubmitting }) => {
-    console.log(`Form submitted with values: ${JSON.stringify(values)}`);
+    fetch("/user_data", {
+      method: "POST",
+      mode: "cors",
+      cache: "no-cache",
+      credentials: "same-origin",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      redirect: "follow",
+      referrer: "no-referrer",
+      body: JSON.stringify(values)
+    }).then(response => {
+      console.log(`Form submitted with values: ${response.json()}`);
+      response.json();
+    });
   };
 
   nextForm = () => {
@@ -186,8 +199,10 @@ export default class Form extends React.Component {
             this.setState(newState);
           }}
         >
-          {ENERGY_SUPPLIERS.map(e => (
-            <option value={e}>{e}</option>
+          {ENERGY_SUPPLIERS.map((e, index) => (
+            <option key={index} value={e}>
+              {e}
+            </option>
           ))}
         </select>
         <br />
