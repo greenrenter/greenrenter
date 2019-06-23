@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "formik": "^1.5.7",
+    "normalize.css": "^8.0.1",
     "highcharts": "^7.1.2",
     "highcharts-react-official": "^2.2.2",
     "react": "^16.8.6",
@@ -33,8 +34,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "@fortawesome/fontawesome-free": "^5.9.0"
   }
 }

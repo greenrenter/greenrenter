@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 import "../assets/styles/main.css";
 import logo from "../assets/images/logo.png";
+import barchart from "../assets/images/bar-chart.png";
 import PieChart from '../components/charts/PieChart';
 import { Logo } from "./Logo";
 
@@ -47,6 +48,13 @@ const Content = styled.div`
         line-height: 50px;
         padding: 20px;
     }
+
+    .barchart {
+        img {
+            width: 415px;
+            height: auto;
+        }
+    }
 `;
 
 const LineBreaker = styled.div`
@@ -65,9 +73,10 @@ class SummaryPage extends Component {
 
 
     state = {
-        email: ''
-    }
+        email: '',
+        energy_bill: 912.45,
 
+    }
 
     componentDidMount() {
         // fetch data from db
@@ -78,6 +87,11 @@ class SummaryPage extends Component {
         // TODO add sending email to external service
         e.preventDefault();
         console.log(`email sent to ${this.state.email}...`);
+    }
+
+    calculateBill = (e) => {
+        console.log(e)
+        console.log('bill getting called')
     }
 
     render() {
@@ -127,12 +141,7 @@ class SummaryPage extends Component {
                         </p>
                     </div>
                     <div className="barchart">
-
-                        <p class="user-results">Above Average</p>
-                          Barchart goes here
-                        <br/>
-                        <br/>
-                        <br/>
+                        <img src={barchart} alt="bar-chart" />
                     </div>
                     <div className="piechart">
                         <p>Here is your energy use breakdown:</p>
@@ -144,14 +153,13 @@ class SummaryPage extends Component {
                         <h2>Affordable energy suppliers</h2>
                         <label>Here are some affordable energy suppliers options: </label>
                         <br />
-                        <select>
-                            <option value="">Red Energy</option>
-                            <option value="">AGL</option>
-                            <option value="">Supplier</option>
+                        <select onChange={this.calculateBill()}>
+                            <option name="Red Energy" >Red Energy</option>
+                            <option name="AGL" >AGL</option>
+                            <option name="Supplier">Supplier</option>
                         </select>
                         <p>
-                            Your estimated annual energy bill is :
-                            <h3>$912.45</h3>
+                            Your estimated annual energy bill is : <strong>${this.state.energy_bill}</strong>
                         </p>
                     </div>
                     <LineBreaker />
@@ -176,7 +184,6 @@ class SummaryPage extends Component {
                         </a>
                     </div>
                     <LineBreaker />
-                    <h3>Ask your friends to take the test too! </h3>
                 </Content>
             </Wrapper>
         );
