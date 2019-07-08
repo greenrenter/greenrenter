@@ -1,7 +1,7 @@
 import React from "react";
 import { Formik, Field, FieldArray } from "formik";
 import Rating from "react-rating";
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 
 import { Logo } from "./Logo";
 import {
@@ -21,7 +21,7 @@ import buttonPlus from "../assets/images/plus-button.png";
 import buttonMinus from "../assets/images/minus-button.png";
 
 // HaRdc0ded energy suppliers xD
-const ENERGY_SUPPLIERS = ["Ausgrid", "AGL", "Energy Australia"];
+const ENERGY_SUPPLIERS = ["Powershop", "AGL", "Energy Australia"];
 
 export default class Form extends React.Component {
   constructor(props) {
@@ -247,9 +247,9 @@ export default class Form extends React.Component {
           <br />
         </FormField>
         {/* <button type="submit"> Calculate </button> */}
-        <Link to="/summary" >
+        <Link to="/summary">
           <button> Calculate </button>
-        </Link >
+        </Link>
       </FormWrapper>
     );
   };
@@ -297,7 +297,7 @@ export default class Form extends React.Component {
           {/* Form */}
           <Formik
             initialValues={this.state.formData}
-            validate={values => { }}
+            validate={values => {}}
             onSubmit={this.submitForm}
           >
             {({
@@ -310,19 +310,19 @@ export default class Form extends React.Component {
               isSubmitting
               /* and other goodies */
             }) => (
-                <form onSubmit={handleSubmit}>
-                  {this.getCurrentForm({
-                    values,
-                    errors,
-                    touched,
-                    handleChange,
-                    handleBlur,
-                    handleSubmit,
-                    isSubmitting
-                    /* and other goodies */
-                  })}
-                </form>
-              )}
+              <form onSubmit={handleSubmit}>
+                {this.getCurrentForm({
+                  values,
+                  errors,
+                  touched,
+                  handleChange,
+                  handleBlur,
+                  handleSubmit,
+                  isSubmitting
+                  /* and other goodies */
+                })}
+              </form>
+            )}
           </Formik>
         </Content>
       </Wrapper>
